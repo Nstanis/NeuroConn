@@ -1,0 +1,64 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\froman\fcharset0 TimesNewRomanPSMT;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\b\fs32 \cf2 \expnd0\expndtw0\kerning0
+Background:
+\f1\b0 \
+Biophysical models of the brain often simulate thousands of neurons spiking in a network. A spike of one neuron is modeled by the characteristic action potential curve that takes inputs from upstream neuronal connections and will send a spike to downstream neurons if a certain voltage threshold is reached. From those models, parameters of connectivity between the neurons and connectivity between the individual layers can be tuned to generate \'91realistic looking\'92 dynamics of neural activity. The two measures of neural activity that most models output are spiking dynamics and local field potentials, which is the averaged activity of spiking neurons in a similar location. The disadvantage of these models is that the parameters are picked by the user to generate the neural dynamics of the model to match that of experimental findings. Often, averaged firing rates and average power of the local field potentials are used to validate that parameters were chosen well. Although these parameters are inspired from biological data, such as number of neurons in each layer of the cortex, average connectivity between layers, and typical activity of individual neurons, this introduces user bias.\
+\'a0\
+In this package, a model of spiking neural activity over a 1 mm
+\fs26\fsmilli13333 \super 3
+\fs32 \nosupersub  will be generated and a readout of local field potentials at the top of the simulated cortex will be displayed.\'a0 There will be 50,000 neurons with 6,000 synapses. Neurons density of each layer will and the connectivity between each layer (Layer 1 through 5), will be parameters of the model. The average activity of the neurons as a function from distance from the top of the cortex will be used to simulate the local field potential. This time series of voltage will then be fit to experimental data of a local field potential recorded from anywhere on the surface of the brain. Parameters will be tuned to fit the simulated local field potential to the experimental local field potential via gradient descent methods. \
+\'a0\
+The output of this model will then be connectivity and neuronal density measures of this region of the cortex. \
+\'a0\
+
+\f0\b User profile
+\f1\b0 :\
+This package is geared towards an audience of computational neuroscience researchers. They must be familiar with python to implement this package into existing pipelines that extract local field potentials form experimental data and process this data in python. \
+\'a0\
+Although this package has computational grounding, it will be accessible to experimental neuroscience researchers that can learn about the regions of the brain they are studying at a mechanics level without knowledge in advanced computational neuroscience tools. \
+\'a0\
+
+\f0\b Use cases:
+\f1\b0 \
+\pard\pardeftab720\li960\fi-480\partightenfactor0
+\cf2 1.
+\f2\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 Compare underlying structure of different brain regions\
+\pard\pardeftab720\li1920\fi-480\partightenfactor0
+\cf2 a.
+\f2\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \ul Objective\ulnone : Compare parameters of the model fit to local field potentials from various brain regions\
+b.
+\f2\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \ul User-system interaction: \ulnone Local field potentials for an array that expands over a single brain region or multiple brain regions could be used to fit the model. Individual electrodes will have a time series of volage over time, aka the local field potential, which allows the model to be fit on each electrode. The model will be initialized for each electrode, the parameters may be fit to each electrode individually. These parameters can be compared between brain regions by using information of the spatial locations of the electrodes. Th\
+\pard\pardeftab720\li960\fi-480\partightenfactor0
+\cf2 2.
+\f2\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 Understand how stimulation changes neural dynamics\
+\pard\pardeftab720\li1920\fi-480\partightenfactor0
+\cf2 a.
+\f2\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \ul Objective\ulnone : Understand how stimulation changes neural activity\
+b.
+\f2\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \ul User-system interaction: \ulnone A model can be fit to a local field potential from a certain brain region. The parameters of the model can be recorded. Then the user will train another model on a local field potential recorded during a brain stimulation paradigm such as electrical, optical, or chemical stimuli. The model will output a separate set of parameters for this condition. Although the underlying structure of the brain is not changed, the functional connectivity and general activity are expected to be modified. The parameters this model outputs will give an idea of how functional connectivity is changing.\
+\pard\pardeftab720\li960\fi-480\partightenfactor0
+\cf2 3.
+\f2\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 Simulate neural activity fit to an individual\'92s brain\
+\pard\pardeftab720\li1920\fi-480\partightenfactor0
+\cf2 a.
+\f2\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \ul Objective\ulnone : Individualize simulated brain for downstream computational methods\
+b.
+\f2\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \ul User-system interaction: \ulnone The user will fit the model to a designated length of signal. The parameters may be extracted and recorded. The model can then be used to generate additional data x timesteps into the future. This time, the data will not have anything to be fit to, but this can be uses as theoretical data that is individualized to the previous data recorded. \
+}
