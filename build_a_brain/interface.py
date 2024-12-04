@@ -5,6 +5,8 @@ from tkinter import ttk
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
+from build_a_brain.neural_simulator import run_simulation, plot_raster
+
 def build_network():
     """
     Purpose: Build the tkinter interface for the neural network that allows the user

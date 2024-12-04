@@ -5,6 +5,8 @@ from tkinter import ttk
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
+from build_a_brain.neural_classes import neural_net, neuron, neural_layer
+
 def run_simulation(root, progress, num_steps,
                     layer_1_size,
                     layer_2_size,

@@ -1,8 +1,7 @@
 Metadata-Version: 2.1
 Name: build_a_brain
-Version: 0.1.3
+Version: 0.2.1
 Summary: Builds a LIF neural network
-Author: Noah Stanis
 Author-email: Noah Stanis <stani123@uw.edu>
 Project-URL: Homepage, https://github.com/pypa/sampleproject
 Project-URL: Issues, https://github.com/pypa/sampleproject/issues

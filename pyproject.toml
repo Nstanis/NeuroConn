@@ -1,6 +1,6 @@
 [project]
 name = "build_a_brain"
-version = "0.1.3"
+version = "0.2.1"
 authors = [
   { name="Noah Stanis", email="stani123@uw.edu" },
 ]
