@@ -6,6 +6,11 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 def build_network():
+    """
+    Purpose: Build the tkinter interface for the neural network that allows the user
+             to input parameters of layer size, layer connectivity, stimulation layer,
+            stimulation strength, and time to run the simulation
+    """
     # Create the main window
     root = tk.Tk()
     root.title("NeuroConn")  # Set the window title
@@ -18,14 +23,12 @@ def build_network():
     # Create a figure and a plot
     fig = Figure(figsize=(5, 3), dpi=100)
     ax = fig.add_subplot(111)
-    # remove axes
-    # hide ax spines
+
+    # Formatting
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['left'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
-
-    # remove y axis
     ax.yaxis.set_visible(False)
     ax.xaxis.set_visible(False)
 
@@ -50,7 +53,7 @@ def build_network():
     label.pack(pady=10)
     label.place(x=10, y=485)
 
-    # Create a Tkinter variable
+    # Create a Tkinter variable for dropdown
     tkvar1 = tk.StringVar(root)
 
     # Dictionary with options
@@ -70,8 +73,6 @@ def build_network():
     stim_intensity = tk.Entry(root, width=8)
     stim_intensity.pack(pady=5)
     stim_intensity.place(x=150, y=510)
-
-
 
     # Define layer sizes text box
     label = tk.Label(root, text="Define layer sizes", font=("Arial", 16))
@@ -135,6 +136,7 @@ def build_network():
     layer1_label = tk.Label(root, text="Layer 1", font=("Arial", 12))
     layer1_label.pack(pady=10)
     layer1_label.place(x=60, y=220)
+
     # text entry for layer 1
     layer11_connectivity = tk.Entry(root, width=4)
     layer11_connectivity.pack(pady=5)
@@ -147,6 +149,7 @@ def build_network():
     layer2_label = tk.Label(root, text="Layer 2", font=("Arial", 12))
     layer2_label.pack(pady=10)
     layer2_label.place(x=110, y=220)
+
     # text entry for layer 2
     layer22_connectivity = tk.Entry(root, width=4)
     layer22_connectivity.pack(pady=5)
@@ -159,6 +162,7 @@ def build_network():
     layer3_label = tk.Label(root, text="Layer 3", font=("Arial", 12))
     layer3_label.pack(pady=10)
     layer3_label.place(x=160, y=220)
+
     # text entry for layer 3
     layer33_connectivity = tk.Entry(root, width=4)
     layer33_connectivity.pack(pady=5)
@@ -171,6 +175,7 @@ def build_network():
     layer4_label = tk.Label(root, text="Layer 4", font=("Arial", 12))
     layer4_label.pack(pady=10)
     layer4_label.place(x=210, y=220)
+
     # text entry for layer 4
     layer44_connectivity = tk.Entry(root, width=4)
     layer44_connectivity.pack(pady=5)
@@ -183,6 +188,7 @@ def build_network():
     layer5_label = tk.Label(root, text="Layer 5", font=("Arial", 12))
     layer5_label.pack(pady=5)
     layer5_label.place(x=260, y=220)
+
     # text entry for layer 5
     layer55_connectivity = tk.Entry(root, width=4)
     layer55_connectivity.pack(pady=5)
@@ -343,10 +349,19 @@ def build_network():
     progress.place(relx=0.535, rely=0.55, anchor="nw")
 
     def on_button_click():
+        """
+        Purpose: Run the simulation with the parameters input by the user
+        Error types: "ERROR: please fill all text boxes" - not all text boxes are filled
+                     "ERROR: please enter valid numbers" - entered value types to not match what is asked for
+                     "ERROR: connectivity values must be between 0 and 100" - exceeds range
+                     "ERROR: stimulation intensity must be between 0 and 100" - exceeds range
+        """
+        # define global variables for labels that need updating upon user input
         global error_label
         global error_label1
         global error_label2
-        # check if any of the inputs are empty
+
+        # CATCH ERROR: check if any of the inputs are empty
         if (layer1_size.get() == "" or layer2_size.get() == "" or layer3_size.get() == "" or layer4_size.get() == "" or layer5_size.get() == "" or
             layer11_connectivity.get() == "" or layer12_connectivity.get() == "" or layer13_connectivity.get() == "" or layer14_connectivity.get() == "" or layer15_connectivity.get() == "" or
             layer21_connectivity.get() == "" or layer22_connectivity.get() == "" or layer23_connectivity.get() == "" or layer24_connectivity.get() == "" or layer25_connectivity.get() == "" or
@@ -371,7 +386,7 @@ def build_network():
             except:
                 pass
         
-        # check if all inputs can be converted to their respective types
+        # CATCH ERROR: check if all inputs can be converted to their respective types
         try:
             int(layer1_size.get())
             int(layer2_size.get())
@@ -427,7 +442,8 @@ def build_network():
                                                     [float(layer13_connectivity.get())/100,float(layer23_connectivity.get())/100,float(layer33_connectivity.get())/100,float(layer43_connectivity.get())/100,float(layer53_connectivity.get())/100],
                                                     [float(layer14_connectivity.get())/100,float(layer24_connectivity.get())/100,float(layer34_connectivity.get())/100,float(layer44_connectivity.get())/100,float(layer54_connectivity.get())/100],
                                                     [float(layer15_connectivity.get())/100,float(layer25_connectivity.get())/100,float(layer35_connectivity.get())/100,float(layer45_connectivity.get())/100,float(layer55_connectivity.get())/100]])
-        # check if connectivity values are between 0 and 100
+        
+        # CATCH ERROR: check if connectivity values are between 0 and 100
         if (np.any(connectivity_matrix < 0) or np.any(connectivity_matrix > 1)):
             try:
                 error_label1.destroy()
@@ -445,7 +461,7 @@ def build_network():
             except:
                 pass
         
-        # Check if stimulation intesnity is between 0 and 100
+        # CATCH ERROR: Check if stimulation intesnity is between 0 and 100
         if (int(stim_intensity.get()) < 0 or int(stim_intensity.get()) > 100):
             # create error label
             try:
@@ -463,15 +479,14 @@ def build_network():
             except:
                 pass
 
-        # run simulation
-        # reset progress bar
-        progress['value'] = 0
-        # reset plot
-        ax.clear()
+        # Formatting GUI
+        progress['value'] = 0  # reset progress bar
+        ax.clear() # reset plot
         ax.xaxis.set_visible(False)
         ax.spines['bottom'].set_visible(False)
-
         canvas.draw()
+
+        # Run stimulation based on user inputs
         net, all_spikes, all_voltages = run_simulation(root, progress, int(num_steps.get()),
                     int(layer1_size.get()),
                     int(layer2_size.get()),
@@ -481,11 +496,15 @@ def build_network():
                     connectivity_matrix,
                     driving_layer = int(tkvar1.get()[-1]) - 1,
                     driving_neuron_nums = int(stim_intensity.get()))
+        
+        # Plot the raster of the network
         plot_raster(ax,root, progress,net,all_spikes,int(num_steps.get()))
         canvas.draw()
         
-
     def clear_connectivity():
+        """
+        Purpose: Clear the text boxes for layer connectivity to be used as a button function
+        """
         # Clear any existing content of all text boxes
         layer1_size.delete(0, tk.END)
         layer2_size.delete(0, tk.END)
@@ -520,6 +539,10 @@ def build_network():
 
     #Add a button to fill the text box
     def default_connectivity_1():
+        """
+        Purpose: Fill the text boxes with default values for layer connectivity to be used as a button function
+                 Can be used to guide the user to a network that is reasonably built
+        """
         # clear connectivity 
         clear_connectivity()
         # Insert predefined text
