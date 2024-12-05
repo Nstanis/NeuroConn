@@ -1,6 +1,6 @@
 [project]
 name = "build_a_brain"
-version = "0.2.1"
+version = "0.2.9"
 authors = [
   { name="Noah Stanis", email="stani123@uw.edu" },
 ]
@@ -13,6 +13,11 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
-[project.urls]
-Homepage = "https://github.com/pypa/sampleproject"
-Issues = "https://github.com/pypa/sampleproject/issues"
+dependencies = [
+    "numpy >= 1.26.4",
+    "matplotlib >= 3.8.3"
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"

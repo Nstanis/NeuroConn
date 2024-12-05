@@ -36,12 +36,18 @@ def run_simulation(root, progress, num_steps,
         all_spikes: time x layer x neuron matrix, spikes of each neuron in the network
         all_voltages: time x layer x neuron matrix, voltages of each neuron in the network
     """
+    # chcek if user is interacting with frontend or backend
+    if root == -1:
+        interaction = "backend"
+    else:
+        interaction = "frontend"
     # set up network parameters 
     num_layers = 5
     dt = 0.001
 
     # Set progress bar to 0
-    progress['value'] = 0  # Increment progress bar
+    if interaction == "frontend":
+        progress['value'] = 0  # Increment progress bar
 
     # Create network
     net = neural_net(num_layers, [layer_1_size,
@@ -61,10 +67,11 @@ def run_simulation(root, progress, num_steps,
     # run network over time
     for i in range(num_steps):
         # update progress bar
-        progress['value'] = 50 * i / num_steps
-
-        # Refresh the GUI
-        root.update_idletasks()  
+        if interaction == "frontend":
+            # Increment progress bar
+            progress['value'] = 50 * i / num_steps
+            # Refresh the GUI
+            root.update_idletasks()  
         
         #Check which neurons in the network spiked at previous time step
         spiked = []
@@ -102,6 +109,11 @@ def plot_raster(ax, root, progress, net,all_spikes,t):
         all_spikes: matrix time x layer x neuron matrix, spikes of each neuron in the network
         t: int, time to run the simulation
     """
+    # chcek if user is interacting with frontend or backend
+    if root == -1:
+        interaction = "backend"
+    else:
+        interaction = "frontend"
 
     # count total neurons in network
     total_neurons = sum([len(net.layers[i].neurons) for i in range(len(net.layers))])
@@ -114,8 +126,9 @@ def plot_raster(ax, root, progress, net,all_spikes,t):
         # iterate over neurons
         color_i = l/len(net.layers)
         for n in range(len(net.layers[l].neurons)):
-            progress['value'] = 50 + 50 * (counter) / total_neurons # update progress bar
-            root.update_idletasks()  # Refresh the GUI
+            if interaction == "frontend":
+                progress['value'] = 50 + 50 * (counter) / total_neurons # update progress bar
+                root.update_idletasks()  # Refresh the GUI
             curr_spikes = [all_spikes[i][l][n] for i in range(len(all_spikes))] # get spikes for current neuron in current layer over time
             ax.scatter(np.linspace(0,t,t), [i+counter for i in np.ones(t)], s = curr_spikes,color = [0,color_i,color_i])
             counter += 1

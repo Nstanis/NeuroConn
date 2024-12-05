@@ -7,7 +7,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from build_a_brain.neural_simulator import run_simulation, plot_raster
 
-def build_network():
+def build_network_interface():
     """
     Purpose: Build the tkinter interface for the neural network that allows the user
              to input parameters of layer size, layer connectivity, stimulation layer,

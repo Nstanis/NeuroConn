@@ -7,4 +7,6 @@ build_a_brain/neural_simulator.py
 build_a_brain.egg-info/PKG-INFO
 build_a_brain.egg-info/SOURCES.txt
 build_a_brain.egg-info/dependency_links.txt
+build_a_brain.egg-info/requires.txt
 build_a_brain.egg-info/top_level.txt
+tests/test_functions.py
