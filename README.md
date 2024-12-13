@@ -31,11 +31,11 @@ build_a_brain.build_network_interface()
 To output the network object, spikes over time, and voltages over time, it is reccomended to use a jupyter notbook. Below is an example of a neural network that can be generated.
 ```
 net, spikes, voltages = run_simulation(-1, -1, num_steps = 100,
-                    layer1_size = 1000,
-                    layer2_size = 1000,
-                    layer3_size = 1000,
-                    layer4_size = 1000,
-                    layer5_size = 1000,
+                    layer_1_size = 1000,
+                    layer_2_size = 1000,
+                    layer_3_size = 1000,
+                    layer_4_size = 1000,
+                    layer_5_size = 1000,
                     connectivity_matrix = np.array([[0,0,0.02,0.02,0.01],
                                                     [0.001,0.001,0,0.001,0.01],
                                                     [0.001,0.001,0.01,0,0.001],
