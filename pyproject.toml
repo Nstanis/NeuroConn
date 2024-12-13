@@ -1,6 +1,6 @@
 [project]
 name = "build_a_brain"
-version = "0.2.9"
+version = "1.0.0"
 authors = [
   { name="Noah Stanis", email="stani123@uw.edu" },
 ]
@@ -15,8 +15,8 @@ classifiers = [
 
 dependencies = [
     "numpy >= 1.26.4",
-    "matplotlib >= 3.8.3"
-    "tk >= 0.1.0",
+    "matplotlib >= 3.8.3",
+    "tk >= 0.1.0"
 ]
 
 [build-system]
